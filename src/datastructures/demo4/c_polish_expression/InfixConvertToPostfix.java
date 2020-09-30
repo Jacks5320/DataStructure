@@ -1,4 +1,4 @@
-package demo4.c_polish_expression;
+package datastructures.demo4.c_polish_expression;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,14 +1,14 @@
-package demo2;
+package datastructures.demo2;
 
 import java.util.Scanner;
 
 /**
- * 数组模拟普通队列，该队列只能使用一次。
+ * 数组模拟循环队列
  */
-public class ArrayQueueDemo {
+public class CircleArrayQueueDemo {
     public static void main(String[] args) {
-        // 创建一个队列
-        ArrayQueue arrayQueue = new ArrayQueue(3);
+        // 创建循环队列
+        CircleArrayQueue arrayQueue = new CircleArrayQueue(4);  // maxsize 最大值为 4 实际存储的有效数据个数为 3，有一个位置用于作约定。
         // 接收用户输入
         char key = ' ';
         Scanner sc = new Scanner(System.in);
@@ -60,63 +60,65 @@ public class ArrayQueueDemo {
 }
 
 // 使用数组模拟队列
-class ArrayQueue {
+class CircleArrayQueue {
     private int maxSize;  // 最大长度
-    private int front;    // 头指针，始终指向头元素的前一个位置。
-    private int rear;     // 尾指针，始终指向尾元素
-    private int[] arr;    // 该数组用于存放数据，模拟队列
+    private int front;  // 队头
+    private int rear;  // 队尾的后一个位置
+    private int[] arr;   // 该数组用于存放数据，模拟队列
 
     // 创建队列的构造器
-    public ArrayQueue(int maxSize) {
-        this.maxSize = maxSize;
-        arr = new int[maxSize];
-        front = -1;
-        rear = -1;
+    public CircleArrayQueue(int maxSize) {
+        this.maxSize = maxSize + 1;  // 增加一个空间做约定
+        arr = new int[this.maxSize];  // 保存数组
+        front = 0;      // 指向队列头元素
+        rear = 0;       // 指向队列尾元素的后一个位置。
     }
 
     // 判断队列是否满
     public boolean isFull() {
-        return rear == maxSize - 1;  // 尾元素存在最大索引元素中
+        // rear 指向不存任何元素的空间
+        System.out.println(this.maxSize);
+        System.out.println(arr.length);
+        return (rear + 1) % maxSize == front;
     }
 
     // 判断队列是否为空
     public boolean isEmpty() {
-        return rear == front;  // 头指针与尾指针指向同一个索引位置。
+        return rear == front;
     }
 
     // 添加数据到队列
     public void addQueue(int n) {
+        //判断队列满
         if (isFull()) {
             System.out.println("队列满，不能添加数据");
             return;
         }
-        // 将尾指针移向后一个空位置
-        rear++;
-        // 存储元素，此时 rear 仍指向尾元素
-        arr[rear] = n;
+        arr[rear] = n;  // 直接赋值
+        rear = (rear + 1) % maxSize;  // 环形结构后移一位取模
     }
 
     // 获取队列数据，出队列
     public int getQueue() {
+        // 判断队列是否为空
         if (isEmpty()) {
             throw new RuntimeException("队列为空，不能取数据");
         }
-        front++;
-        return arr[front];
+        int temp = arr[front];  // 取 front 指向位置的值
+        front = (front + 1) % maxSize;  // front 后移一位，然后取模，取相对位置
+        return temp;
     }
 
-    // 显示队列中所有数据
+    // 显示所有数据
     public void showQueue() {
         // 遍历数组
         if (isEmpty()) {
             System.out.println("队列空，没有数据~");
             return;
         }
-        // 从头元素取到尾元素。
-        // front 始终指向头元素索引的前一个位置，所以要从 front + 1 ，也就是头元素索引位置开始取值
-        // rear 始终指向尾元素的索引，所以取值的索引范围为[front + 1 , rear]
-        for (int i = front + 1; i <= rear; i++) {
-            System.out.printf("arr[%d]=%d\n", i, arr[i]);
+        // 从 front 开始遍历，遍历有效元素个数。
+        for (int i = front; i <= front + (rear - 1 + maxSize - front) % maxSize; i++) {
+            System.out.printf("arr[%d]=%d\n", i % maxSize, arr[i % maxSize]);
         }
     }
 

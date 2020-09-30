@@ -1,4 +1,4 @@
-package demo3;
+package datastructures.demo3;
 
 /**
  * 结点数据域对象

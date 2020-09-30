@@ -1,4 +1,4 @@
-package demo1;
+package datastructures.demo1;
 
 import java.io.*;
 import java.util.ArrayList;

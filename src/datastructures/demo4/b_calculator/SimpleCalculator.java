@@ -1,6 +1,6 @@
-package demo4.b_calculator;
+package datastructures.demo4.b_calculator;
 
-import demo4.a_stack.ArrayStack;
+import datastructures.demo4.a_stack.ArrayStack;
 
 /**
  * 简单计算器：中缀表达式， 2 * 2 + 1 * 2 = 6

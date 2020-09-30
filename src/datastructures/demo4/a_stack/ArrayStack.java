@@ -1,4 +1,4 @@
-package demo4.a_stack;
+package datastructures.demo4.a_stack;
 
 /**
  * 数组模拟栈结构

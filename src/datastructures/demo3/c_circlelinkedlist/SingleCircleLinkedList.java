@@ -1,6 +1,6 @@
-package demo3.c_circlelinkedlist;
+package datastructures.demo3.c_circlelinkedlist;
 
-import demo3.Student;
+import datastructures.demo3.Student;
 
 /**
  * 单向环形列表

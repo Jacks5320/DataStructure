@@ -1,6 +1,6 @@
-package demo3.a_singlelinkedlist;
+package datastructures.demo3.a_singlelinkedlist;
 
-import demo3.Student;
+import datastructures.demo3.Student;
 
 /**
  * 单链表

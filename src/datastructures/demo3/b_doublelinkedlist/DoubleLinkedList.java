@@ -1,6 +1,6 @@
-package demo3.b_doublelinkedlist;
+package datastructures.demo3.b_doublelinkedlist;
 
-import demo3.Student;
+import datastructures.demo3.Student;
 
 /**
  * 双向链表，在单链表的基础上增加

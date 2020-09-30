@@ -1,6 +1,6 @@
-package demo3.b_doublelinkedlist;
+package datastructures.demo3.b_doublelinkedlist;
 
-import demo3.Student;
+import datastructures.demo3.Student;
 
 /**
  * 测试双向链表功能
