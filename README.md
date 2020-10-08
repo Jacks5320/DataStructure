@@ -2,7 +2,7 @@
 
 持续更新
 
-## 模块
+## 项目模块
 
 数据结构：datastructures
 
@@ -22,6 +22,8 @@
 
 ## 博客地址
 
+### 数据结构
+
 [稀疏数组](https://blog.csdn.net/qq_44713454/article/details/108570361)
 
 [Java 数组实现普通队列与循环队列](https://blog.csdn.net/qq_44713454/article/details/108628439)
@@ -31,3 +33,19 @@
 [栈](https://blog.csdn.net/qq_44713454/article/details/108831105)
 
 [中缀表达式转后缀表达式](https://blog.csdn.net/qq_44713454/article/details/108834358)
+
+### 排序算法
+
+[冒泡排序](https://blog.csdn.net/qq_44713454/article/details/108939037)
+
+[选择排序](https://blog.csdn.net/qq_44713454/article/details/108940642)
+
+[插入排序](https://blog.csdn.net/qq_44713454/article/details/108941011)
+
+[希尔排序](https://blog.csdn.net/qq_44713454/article/details/108942028)
+
+[快速排序](https://blog.csdn.net/qq_44713454/article/details/108942418)
+
+[归并排序](https://blog.csdn.net/qq_44713454/article/details/108961620)
+
+[基数排序](https://blog.csdn.net/qq_44713454/article/details/108966724)
