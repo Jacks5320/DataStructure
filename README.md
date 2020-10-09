@@ -14,11 +14,15 @@
 
 - demo4 ==> 栈，中缀表达式转后缀表达式
 
+- demo5 ==> 哈希表
+
 算法：algorithms
 
 - demo1 ==> 递归
 
 - demo2 ==> 排序
+
+- demo3 ==> 查找
 
 ## 博客地址
 
@@ -49,3 +53,7 @@
 [归并排序](https://blog.csdn.net/qq_44713454/article/details/108961620)
 
 [基数排序](https://blog.csdn.net/qq_44713454/article/details/108966724)
+
+### 查找算法
+
+[二分查找](https://blog.csdn.net/qq_44713454/article/details/108977756)
