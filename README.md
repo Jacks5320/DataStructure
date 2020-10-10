@@ -16,6 +16,8 @@
 
 - demo5 ==> 哈希表
 
+- demo6 ==> 树结构
+
 算法：algorithms
 
 - demo1 ==> 递归
