@@ -42,6 +42,8 @@
 
 [散列表](https://blog.csdn.net/qq_44713454/article/details/108995013)
 
+[二叉树](https://blog.csdn.net/qq_44713454/article/details/108999042)
+
 ### 排序算法
 
 [冒泡排序](https://blog.csdn.net/qq_44713454/article/details/108939037)
@@ -57,6 +59,8 @@
 [归并排序](https://blog.csdn.net/qq_44713454/article/details/108961620)
 
 [基数排序](https://blog.csdn.net/qq_44713454/article/details/108966724)
+
+[堆排序](https://blog.csdn.net/qq_44713454/article/details/109045260)
 
 ### 查找算法
 
