@@ -44,6 +44,8 @@
 
 [二叉树](https://blog.csdn.net/qq_44713454/article/details/108999042)
 
+[哈夫曼树与哈夫曼编码](https://blog.csdn.net/qq_44713454/article/details/109050262)
+
 ### 排序算法
 
 [冒泡排序](https://blog.csdn.net/qq_44713454/article/details/108939037)
