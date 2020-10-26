@@ -1,7 +1,7 @@
 package datastructures.demo6.f_avltree;
 
 /**
- * 平衡二叉树（AVL树）结点
+ * 树节点
  */
 public class TreeNode {
     int value;
@@ -12,77 +12,119 @@ public class TreeNode {
         this.value = value;
     }
 
-    /* 左子树的高度 */
-    public int leftHeight() {
-        if (left == null) {
-            return 0;
+    @Override
+    public String toString() {
+        return "TreeNode{value=" + value + "}";
+    }
+
+    /* 先序遍历 */
+    public void preorder() {
+        System.out.println(this);
+        if (this.left != null) this.left.preorder();
+        if (this.right != null) this.right.preorder();
+    }
+
+    /* 中序遍历 */
+    public void inorder() {
+        if (this.left != null) this.left.inorder();
+        System.out.println(this);
+        if (this.right != null) this.right.inorder();
+    }
+
+    /* 查找目标结点 */
+    public TreeNode search(TreeNode node) {
+        if (this.value == node.value) {  // 找到直接返回
+            return this;
+        } else if (this.value > node.value && this.left != null) {  // 目标结点的值比当前结点的值小，且当前结点存在左子树，则继续向左子树查找
+            return this.left.search(node);
+        } else if (this.value < node.value && this.right != null) {  // 目标结点的值比当前结点的值大，且当前结点存在右子树，则继续向右子树查找
+            return this.right.search(node);
+        } else {  // 如果目标结点的值不等于当前结点，且当前结点没有对应的子树时，说明不存在。
+            return null;
         }
+    }
+
+    /* 查找某个结点的父结点 */
+    public TreeNode searchParent(TreeNode node) {
+        if (this.left != null && this.left.value == node.value) {  // 目标结点是当前结点的左孩子
+            return this;
+        } else if (this.right != null && this.right.value == node.value) {  // 目标结点是当前结点的右孩子
+            return this;
+        } else {  // 目标结点不是当前结点的孩子
+            if (this.value > node.value && this.left != null) {  // 目标结点可能在当前结点的左子树中，且当前结点的左子树存在
+                return this.left.searchParent(node);
+            } else if (this.value <= node.value && this.right != null) {  // 目标结点可能在当前结点的右子树中，且当前结点的右子树存在
+                return this.right.searchParent(node);
+            } else {  // 目标可能存在与当前结点的子树中，但是当前结点的子树不存在
+                return null;
+            }
+        }
+    }
+
+    /* 获取指定结点为根结点的树的高度 */
+    public int height() {
+        int max;
+        int maxL = 0;
+        int maxR = 0;
+        if (left != null) maxL = left.height();
+        if (right != null) maxR = right.height();
+        max = maxL > maxR ? maxL + 1 : maxR + 1;
+        return max;
+    }
+
+    public int leftHeight() {
+        if (left == null) return 0;
         return left.height();
     }
 
-    /* 右子树的高度 */
     public int rightHeight() {
-        if (right == null) {
-            return 0;
-        }
+        if (right == null) return 0;
         return right.height();
     }
 
-    /* 树的高度 */
-    public int height() {
-        return Math.max(left == null ? 0 : left.height(), right == null ? 0 : right.height()) + 1;
-    }
-
-    /* 左旋转 */
+    /* 左旋 */
     public void leftRotate() {
-        // 创建新结点的值，以当前根结点的值
-        TreeNode newNode = new TreeNode(value);
-        // 新结点的左子树设置成当前结点的左子树
-        newNode.left = left;
-        // 把新结点的右子树设置为当前结点右子树的左子树
-        newNode.right = right.left;
-        // 把当前结点的值替换成右子结点的值
+        // 命中不平衡二叉树的根结点，用当前根结点的值创建新的结点
+        TreeNode node = new TreeNode(value);
+        // 将新结点的左子树设置为当前结点的左子树
+        node.left = left;
+        // 将新结点的右子树设置当前结点右孩子的左子树
+        node.right = right.left;
+        // 用当前结点右孩子的值覆盖当前结点的值
         value = right.value;
-        // 把当前结点的右子树设置成右子树的右子树
+        // 删除当前结点的右孩子
         right = right.right;
-        // 把当前结点的左子树设置成新的结点
-        left = newNode;
+        // 将当前结点的左孩子设置为新结点
+        left = node;
     }
 
-    /* 右旋转 */
+    /* 右旋 */
     public void rightRotate() {
-        // 创建新的结点
-        TreeNode newNode = new TreeNode(value);
-
-        newNode.right = right;
-
-        newNode.left = left.right;
-
+        // 命中不平衡二叉树的最小子树的根结点，将根结点的值取出创建新的结点
+        TreeNode node = new TreeNode(value);
+        // 新结点的右子树设置成当前结点的右子树
+        node.right = right;
+        // 新结点的左子树设置成当前结点左孩子的右子树
+        node.left = left.right;
+        // 用左孩子的值覆盖当前结点的值
         value = left.value;
-
+        // 删除当前结点的左孩子
         left = left.left;
-
-        right = newNode;
+        // 将当前结点的右孩子设置成新结点
+        right = node;
     }
 
-    /**
-     * 添加结点
-     *
-     * @param node 新结点
-     */
+    /* 添加新结点 */
     public void add(TreeNode node) {
-        if (node == null) {
-            return;
-        }
-        // 传入结点的值比当前树的根节点小，就从左子树中寻找插入位置
+        if (node == null) return;
+        // 如果待插入结点小于当前结点，就往当前结点的左子树中寻找插入位置
         if (node.value < this.value) {
-            // 当前结点没有左子结点，就添加
-            if (this.left == null) {
+            if (this.left == null) {// 没有左孩子直接插入
                 this.left = node;
-            } else {  // 否则就向左子树递归
+            } else {  // 有左孩子，继续查找
                 this.left.add(node);
             }
-        } else {  // 传入结点不小于当前树的根节点，就从右子树中寻找插入位置。
+        } else {  // 如果待插入节点不小于当前结点，就往当前结点的右子树中寻找插入位置
             if (this.right == null) {
                 this.right = node;
             } else {
@@ -90,86 +132,25 @@ public class TreeNode {
             }
         }
 
-        // 当添加完一个结点后，如果左右子树高度的绝对值大于1，需要旋转
-        // 左低右高左旋转
+        // 添加完成后，判断是否需要旋转
+
+        // RR 或 RL 型
         if (rightHeight() - leftHeight() > 1) {
-            // 右子树的左子树的高度大于它的右子树的右子树的高度
+            // 如果右子结点存在，且右子结点的左子树比右子结点的右子树的高，那么就是 RL 型
             if (right != null && right.leftHeight() > right.rightHeight()) {
-                // 先对右子结点进行右旋转
-                right.rightRotate();
+                right.rightRotate();  // 右旋
             }
-            leftRotate();  // 左旋转
+            leftRotate();  // RR，左旋
             return;
         }
-        if (leftHeight() - rightHeight() > 1) {  // 右低左高，右旋转
-            if (left != null && left.rightHeight() > left.leftHeight()) {
-                // 先对当前结点的左子树左旋转
-                left.leftRotate();
+        // LL 或 LR 型，
+        if (leftHeight() - rightHeight() > 1) {
+            // 如果左子结点存在，且左子结点的右子树比左子结点的左子树高，那么就是 RL 型
+            if (left != null && left.rightHeight() > left.leftHeight() ) {  // LR 型，先左旋再右旋
+                left.leftRotate();  // 左旋
             }
-            rightRotate();
+            rightRotate();  // LL型，右旋
         }
     }
 
-    /**
-     * 查找目标结点
-     *
-     * @param value 待查结点的值
-     * @return 目标结点
-     */
-    public TreeNode search(int value) {
-        if (value == this.value) {
-            return this;
-        } else if (value < this.value) {  // 向左子树找
-            if (this.left != null) {
-                return this.left.search(value);
-            }
-            return null;
-        } else {
-            if (this.right != null) {
-                return this.right.search(value);
-            }
-            return null;
-        }
-    }
-
-    /**
-     * 查找删除结点父结点
-     *
-     * @param value 待删除结点的值
-     * @return 父结点
-     */
-    public TreeNode searchParent(int value) {
-        // 目标结点是当前结点的左子结点
-        if (this.left != null && value == this.left.value) return this;
-        // 待删除结点是当前结点的右子结点
-        if (this.right != null && value == this.right.value) return this;
-        // 目标结点的值小于当前结点，遍历左子树
-        if (value < this.value && this.left != null) return this.left.searchParent(value);
-        // 目标结点的值大于当前结点，遍历右子树
-        if (value > this.value && this.right != null) return this.right.searchParent(value);
-        // 都不满足，返回 null
-        return null;
-    }
-
-    /**
-     * 中序遍历
-     */
-    public void inorder() {
-        if (this.left != null) {
-            this.left.inorder();
-        }
-
-        System.out.println(this);
-
-        if (this.right != null) {
-            this.right.inorder();
-        }
-    }
-
-    @Override
-    public String toString() {
-        return "TreeNode{" +
-                "value=" + value +
-                '}';
-    }
 }

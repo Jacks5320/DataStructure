@@ -46,6 +46,10 @@
 
 [哈夫曼树与哈夫曼编码](https://blog.csdn.net/qq_44713454/article/details/109050262)
 
+[二叉排序树(Binary Sort Tree)](https://blog.csdn.net/qq_44713454/article/details/109227454)
+
+[AVL树](https://blog.csdn.net/qq_44713454/article/details/109232694)
+
 ### 排序算法
 
 [冒泡排序](https://blog.csdn.net/qq_44713454/article/details/108939037)
